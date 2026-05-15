@@ -1,0 +1,12 @@
+.tab-active {
+  color: #7C5C42;
+  border-color: #C9A96E;
+}
+.tab-inactive {
+  color: rgba(124,92,66,0.4);
+  border-color: transparent;
+  &:hover { color: #7C5C42; border-color: rgba(201,169,110,0.3); }
+}
+.product-card .image-wrap {
+  box-shadow: 0 2px 12px rgba(124,92,66,0.06);
+}

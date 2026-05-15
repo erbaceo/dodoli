@@ -1,0 +1,31 @@
+.hero-section {
+  background: #2a1f15;
+}
+
+.hero-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(30,20,12,0.35) 0%,
+    rgba(30,20,12,0.25) 40%,
+    rgba(30,20,12,0.55) 100%
+  );
+}
+
+.scroll-line {
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { transform: scaleY(1); opacity: 0.2; }
+  50%       { transform: scaleY(0.5); opacity: 0.5; }
+}
+
+.category-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(201,169,110,0.04) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.category-card:hover::before { opacity: 1; }
