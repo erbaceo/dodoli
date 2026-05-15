@@ -12,8 +12,8 @@ import { RouterLink } from '@angular/router';
 
           <!-- Brand -->
           <div class="md:col-span-1">
-            <img src="assets/logo_esteso.svg" alt="Dodolí" class="h-10 mb-4 opacity-70"
-                 onerror="this.src='assets/logo_esteso.png'" />
+            <img src="assets/logo_esteso.svg" alt="Dodolí" class="mb-4 opacity-80"
+                 onerror="this.src='assets/logo.svg'" />
             <p class="font-cormorant italic text-n-500 text-base leading-relaxed">
               piccole cose,<br>grandi ricordi.
             </p>

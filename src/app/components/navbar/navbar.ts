@@ -35,7 +35,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
         <!-- Center logo -->
         <div class="flex justify-center">
           <a routerLink="/" class="block">
-            <img src="assets/logo_esteso.svg"
+            <img src="assets/logo.svg"
                  alt="Dodolí Boutique"
                  class="h-9 md:h-11 w-auto object-contain transition-opacity duration-300 hover:opacity-70"
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='block'" />
