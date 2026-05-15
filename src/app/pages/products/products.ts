@@ -1,21 +1,14 @@
 import { Component, inject, signal, computed, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ProductsService, Product } from '../../services/products';
 
 type Tab = 'new' | 'ceremony' | 'second' | 'packaging';
 
-interface TabConfig {
-  key: Tab;
-  label: string;
-  sub: string;
-  filterFn: (p: Product, idx: number) => boolean;
-}
-
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule],
   templateUrl: './products.html',
   styleUrl:    './products.scss',
 })
@@ -23,62 +16,43 @@ export class ProductsComponent implements OnInit {
   private svc   = inject(ProductsService);
   private route = inject(ActivatedRoute);
 
-  allProducts  = signal<Product[]>([]);
-  loading      = signal(true);
-  error        = signal<string | null>(null);
-  activeTab    = signal<Tab>('new');
-  selectedProduct = signal<Product | null>(null);
+  all     = signal<Product[]>([]);
+  loading = signal(true);
+  error   = signal<string | null>(null);
+  tab     = signal<Tab>('new');
+  modal   = signal<Product | null>(null);
 
-  tabs: TabConfig[] = [
-    {
-      key: 'new',
-      label: 'Nuovi Arrivi',
-      sub: 'Le ultime novità',
-      filterFn: (_, i) => i % 4 !== 3,
-    },
-    {
-      key: 'ceremony',
-      label: 'Cerimonia',
-      sub: 'Per i giorni speciali',
-      filterFn: (p) => ['womens-dresses','tops-womens','mens-suits'].includes(p.category),
-    },
-    {
-      key: 'second',
-      label: 'Second Hand Selezionato',
-      sub: 'Pezzi unici curati',
-      filterFn: (_, i) => i % 3 === 0,
-    },
-    {
-      key: 'packaging',
-      label: 'Packaging Dodolí',
-      sub: 'Confezioni regalo',
-      filterFn: (p) => p.category.includes('beauty') || p.category.includes('fragrances') || p.category.includes('skin'),
-    },
+  tabs: { key: Tab; label: string; desc: string }[] = [
+    { key: 'new',       label: 'Nuovi Arrivi',            desc: 'Le ultime novità in boutique' },
+    { key: 'ceremony',  label: 'Cerimonia',               desc: 'Per i momenti indimenticabili' },
+    { key: 'second',    label: 'Second Hand Selezionato', desc: 'Pezzi unici, curati con amore' },
+    { key: 'packaging', label: 'Packaging Dodolí',        desc: 'Confezioni regalo esclusive' },
   ];
 
-  visibleProducts = computed(() => {
-    const tab = this.tabs.find(t => t.key === this.activeTab())!;
-    return this.allProducts().filter(tab.filterFn).slice(0, 24);
+  products = computed(() => {
+    const p = this.all();
+    switch (this.tab()) {
+      case 'new':       return p.filter((_, i) => i % 4 !== 0).slice(0, 24);
+      case 'ceremony':  return p.filter(x => ['womens-dresses','tops-womens','mens-suits'].includes(x.category)).slice(0, 24);
+      case 'second':    return p.filter((_, i) => i % 3 === 0).slice(0, 24);
+      case 'packaging': return p.filter(x => x.category.includes('beauty') || x.category.includes('fragrances') || x.category.includes('skin')).slice(0, 20);
+    }
   });
 
+  currentTab = computed(() => this.tabs.find(t => t.key === this.tab())!);
+
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      const cat = params['category'] as Tab;
-      if (cat && this.tabs.find(t => t.key === cat)) {
-        this.activeTab.set(cat);
-      }
+    this.route.queryParams.subscribe(p => {
+      const t = p['tab'] as Tab;
+      if (t && this.tabs.find(x => x.key === t)) this.tab.set(t);
     });
-
     this.svc.getAll().subscribe({
-      next: (res) => { this.allProducts.set(res.products); this.loading.set(false); },
-      error: ()  => { this.error.set('Impossibile caricare i prodotti.'); this.loading.set(false); }
+      next: r  => { this.all.set(r.products); this.loading.set(false); },
+      error: () => { this.error.set('Errore nel caricamento.'); this.loading.set(false); }
     });
   }
 
-  discounted(p: Product) {
-    return Math.round(p.price * (1 - p.discountPercentage / 100));
-  }
-
-  openModal(p: Product) { this.selectedProduct.set(p); }
-  closeModal() { this.selectedProduct.set(null); }
+  price(p: Product) { return Math.round(p.price * (1 - p.discountPercentage / 100)); }
+  open(p: Product)  { this.modal.set(p); }
+  close()           { this.modal.set(null); }
 }

@@ -12,20 +12,14 @@ export interface Product {
   category: string;
   thumbnail: string;
   images: string[];
-  tags?: string[];
 }
 
-export interface ProductsResponse {
-  products: Product[];
-  total: number;
-}
+export interface ProductsResponse { products: Product[]; total: number; }
 
 @Injectable({ providedIn: 'root' })
 export class ProductsService {
   private http = inject(HttpClient);
-  private API = 'https://dummyjson.com/products';
-
   getAll(limit = 100): Observable<ProductsResponse> {
-    return this.http.get<ProductsResponse>(`${this.API}?limit=${limit}`);
+    return this.http.get<ProductsResponse>(`https://dummyjson.com/products?limit=${limit}`);
   }
 }

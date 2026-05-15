@@ -1,12 +1,14 @@
-.tab-active {
-  color: #7C5C42;
-  border-color: #C9A96E;
+.tab-on  { color: #6B4C35; border-color: #6B4C35; }
+.tab-off { color: #A8937A; border-color: transparent;
+           &:hover { color: #6B4C35; } }
+
+.product-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(2, 1fr);
+  @media (min-width: 768px)  { grid-template-columns: repeat(3, 1fr); }
+  @media (min-width: 1280px) { grid-template-columns: repeat(4, 1fr); }
 }
-.tab-inactive {
-  color: rgba(124,92,66,0.4);
-  border-color: transparent;
-  &:hover { color: #7C5C42; border-color: rgba(201,169,110,0.3); }
-}
-.product-card .image-wrap {
-  box-shadow: 0 2px 12px rgba(124,92,66,0.06);
-}
+
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

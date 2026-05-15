@@ -6,48 +6,72 @@ import { RouterLink } from '@angular/router';
   standalone: true,
   imports: [RouterLink],
   template: `
-    <footer class="bg-moka-dark text-latte/80 pt-16 pb-8 px-6 md:px-16">
-      <div class="max-w-6xl mx-auto">
+    <footer class="border-t border-n-200 bg-n-100 pt-16 pb-10 px-6 md:px-16 mt-20">
+      <div class="max-w-screen-xl mx-auto">
+        <div class="grid md:grid-cols-4 gap-10 md:gap-6 mb-14">
 
-        <!-- Logo + tagline -->
-        <div class="flex flex-col items-center mb-12">
-          <img src="assets/logo_esteso.png" alt="Dodolí" class="h-16 mb-4"
-               onerror="this.src='assets/logo_esteso.svg'" />
-          <p class="font-display italic text-lg text-cipria-light/60 tracking-widest">
-            piccole cose, grandi ricordi
-          </p>
-        </div>
+          <!-- Brand -->
+          <div class="md:col-span-1">
+            <img src="assets/logo_esteso.svg" alt="Dodolí" class="h-10 mb-4 opacity-70"
+                 onerror="this.src='assets/logo_esteso.png'" />
+            <p class="font-cormorant italic text-n-500 text-base leading-relaxed">
+              piccole cose,<br>grandi ricordi.
+            </p>
+          </div>
 
-        <div class="border-t border-latte/10 pt-10 grid md:grid-cols-3 gap-10 text-center md:text-left">
-          <!-- Negozio -->
+          <!-- Collezione -->
           <div>
-            <h4 class="font-body text-[10px] tracking-ultra uppercase text-gold/70 mb-4">Il Negozio</h4>
-            <p class="font-light text-sm leading-relaxed text-latte/50">Via dei Giardini 12<br>41121 Modena (MO)</p>
-            <p class="font-light text-sm mt-3 text-latte/50">Lun–Ven  9:30–13 / 15:30–19<br>Sab  9:30–13:00</p>
+            <p class="font-sans font-medium text-[10px] tracking-px24 uppercase text-n-400 mb-5">Collezione</p>
+            <ul class="space-y-3">
+              @for (l of collection; track l) {
+                <li>
+                  <a [routerLink]="['/products']" [queryParams]="{tab: l.key}"
+                     class="font-sans font-light text-[12px] text-n-500 hover:text-moka transition-colors u-reveal">
+                    {{ l.label }}
+                  </a>
+                </li>
+              }
+            </ul>
           </div>
-          <!-- Nav -->
-          <div class="flex flex-col items-center gap-3">
-            @for (l of links; track l.path) {
-              <a [routerLink]="l.path" class="font-body text-[11px] tracking-wide-xl uppercase text-latte/40 hover:text-gold transition-colors">
-                {{ l.label }}
-              </a>
-            }
+
+          <!-- Info -->
+          <div>
+            <p class="font-sans font-medium text-[10px] tracking-px24 uppercase text-n-400 mb-5">Informazioni</p>
+            <ul class="space-y-3">
+              @for (l of info; track l) {
+                <li>
+                  <a [routerLink]="l.path"
+                     class="font-sans font-light text-[12px] text-n-500 hover:text-moka transition-colors u-reveal">
+                    {{ l.label }}
+                  </a>
+                </li>
+              }
+            </ul>
           </div>
+
           <!-- Contatti -->
-          <div class="md:text-right">
-            <h4 class="font-body text-[10px] tracking-ultra uppercase text-gold/70 mb-4">Contatti</h4>
-            <p class="font-light text-sm text-latte/50">info&#64;dodoli.it</p>
-            <p class="font-light text-sm text-latte/50 mt-1">+39 059 123 4567</p>
-            <div class="flex gap-4 mt-4 justify-center md:justify-end">
-              <a href="#" class="text-latte/30 hover:text-cipria transition-colors text-xl">◎</a>
-              <a href="#" class="text-latte/30 hover:text-cipria transition-colors text-xl">✦</a>
-            </div>
+          <div>
+            <p class="font-sans font-medium text-[10px] tracking-px24 uppercase text-n-400 mb-5">Il Negozio</p>
+            <address class="not-italic font-sans font-light text-[12px] text-n-500 leading-relaxed space-y-1">
+              <p>Via dei Giardini 12</p>
+              <p>41121 Modena (MO)</p>
+              <p class="mt-3">Lun–Ven &nbsp; 9:30–19:00</p>
+              <p>Sabato &nbsp; 9:30–13:00</p>
+              <p class="mt-3">
+                <a href="mailto:info@dodoli.it" class="hover:text-moka transition-colors u-reveal">
+                  info&#64;dodoli.it
+                </a>
+              </p>
+            </address>
           </div>
         </div>
 
-        <div class="border-t border-latte/10 mt-10 pt-6 text-center">
-          <p class="font-caption text-[10px] tracking-widest uppercase text-latte/25">
+        <div class="border-t border-n-200 pt-8 flex flex-col md:flex-row justify-between items-center gap-3">
+          <p class="font-sans font-light text-[10px] tracking-px8 text-n-400 uppercase">
             © 2025 Dodolí Boutique · Tutti i diritti riservati
+          </p>
+          <p class="font-sans font-light text-[10px] tracking-px8 text-n-400 uppercase">
+            Modena · Italia
           </p>
         </div>
       </div>
@@ -55,9 +79,14 @@ import { RouterLink } from '@angular/router';
   `
 })
 export class FooterComponent {
-  links = [
-    { path: '/', label: 'Home' },
-    { path: '/products', label: 'Collezione' },
+  collection = [
+    { key: 'new',       label: 'Nuovi Arrivi' },
+    { key: 'ceremony',  label: 'Cerimonia' },
+    { key: 'second',    label: 'Second Hand' },
+    { key: 'packaging', label: 'Packaging' },
+  ];
+  info = [
     { path: '/about', label: 'Chi Siamo' },
+    { path: '/about', label: 'Contatti' },
   ];
 }

@@ -1,118 +1,96 @@
-<!-- Hero -->
-<section class="pt-32 pb-0 relative overflow-hidden">
-  <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-0 min-h-[70vh] items-stretch">
-    <!-- Text side -->
-    <div class="flex flex-col justify-center py-16 md:py-24 pr-0 md:pr-16">
-      <p class="font-caption text-[10px] tracking-ultra uppercase text-gold mb-6">La nostra storia</p>
-      <h1 class="font-display text-5xl md:text-6xl italic font-light text-moka leading-snug mb-8">
+<!-- HERO — full-width image + overlapping text block -->
+<section class="relative pt-0">
+  <!-- Image -->
+  <div class="w-full h-[70vh] overflow-hidden bg-n-200">
+    <img src="https://images.unsplash.com/photo-1544776193-352d25ca82cd?w=1600&q=90&fit=crop"
+         alt="Dodolí"
+         class="w-full h-full object-cover object-center" />
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-n-50/80"></div>
+  </div>
+
+  <!-- Overlapping text card -->
+  <div class="max-w-screen-xl mx-auto px-4 md:px-8 lg:px-12">
+    <div class="relative -mt-24 md:-mt-32 bg-n-50 max-w-xl px-8 md:px-12 py-10 md:py-14">
+      <p class="font-sans font-light text-[10px] tracking-px24 uppercase text-n-400 mb-4">La nostra storia</p>
+      <h1 class="font-cormorant font-light text-4xl md:text-5xl text-moka leading-snug">
         Nata per amore.<br>
-        <span class="text-moka/50">Cresciuta con voi.</span>
+        <em class="italic text-n-500">Cresciuta con voi.</em>
       </h1>
-      <div class="w-10 h-px bg-gold/40 mb-8"></div>
-      <!-- Emotional micro-story -->
-      <div class="space-y-5 font-light text-sm text-moka/65 leading-relaxed max-w-sm">
-        <p>
-          Era una mattina di settembre del 2018. Mia figlia aveva appena compiuto due anni,
-          e stavo svuotando l'armadio di vestitini diventati troppo piccoli —
-          quasi nuovi, lavati con cura, profumati di buono.
-        </p>
-        <p>
-          Non riuscivo a buttarli. Dietro ogni abito c'era una foto, un sorriso, un momento.
-          <em class="text-moka/80">«Questi non sono stracci», pensai. «Sono ricordi.»</em>
-        </p>
-        <p>
-          Dodolí è nata così: dalla certezza che i vestiti dei bambini meritino
-          una seconda storia, bella come la prima.
-        </p>
-      </div>
-    </div>
-    <!-- Image side -->
-    <div class="relative overflow-hidden min-h-80">
-      <img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=900&q=85&fit=crop&crop=center"
-           alt="Boutique Dodolí" class="w-full h-full object-cover" />
-      <div class="absolute inset-0 bg-gradient-to-r from-ivory via-transparent to-transparent md:block hidden"></div>
     </div>
   </div>
 </section>
 
-<!-- Founder -->
-<section class="bg-panna border-y border-latte py-20 px-6">
-  <div class="max-w-5xl mx-auto grid md:grid-cols-3 gap-12 items-center">
+<!-- EMOTIONAL STORY -->
+<section class="max-w-screen-xl mx-auto px-4 md:px-8 lg:px-12 py-16 md:py-24">
+  <div class="grid md:grid-cols-12 gap-8 md:gap-12 items-start">
 
-    <!-- Avatar -->
-    <div class="flex justify-center">
-      <div class="relative">
-        <div class="w-52 h-52 rounded-full overflow-hidden border-4 border-avorio shadow-xl">
-          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80&fit=crop&crop=face"
-               alt="Fondatrice" class="w-full h-full object-cover" />
-        </div>
-        <div class="absolute -bottom-3 -right-3 w-14 h-14 bg-cipria rounded-full flex items-center justify-center shadow-lg">
-          <img src="assets/logo.svg" alt="logo" class="w-7 h-7 opacity-80"
-               onerror="this.src='assets/logo.png'" />
-        </div>
+    <!-- Micro-story -->
+    <div class="md:col-span-5 md:col-start-2">
+      <p class="font-sans font-light text-[10px] tracking-px24 uppercase text-n-400 mb-6">Una storia vera</p>
+      <div class="space-y-5 font-sans font-light text-[14px] text-n-500 leading-loose">
+        <p>
+          Era una mattina di settembre del 2018.
+          Stavo svuotando l'armadio di mia figlia — due anni appena compiuti —
+          e davanti a me c'era una montagna di vestitini quasi nuovi,
+          lavati con cura, profumati di buono.
+        </p>
+        <p class="font-cormorant italic text-xl text-moka leading-snug">
+          "Questi non sono stracci.<br>Sono ricordi."
+        </p>
+        <p>
+          Non riuscivo a buttarli. E non riuscivo a immaginarli finire dimenticati
+          in un sacco per la raccolta. Così ho iniziato a raccoglierli, selezionarli,
+          regalarli — e poi a venderli.
+        </p>
+        <p>
+          Dodolí è nata così: da una scatola in un cortile.
+          Oggi è una boutique fisica nel centro di Modena,
+          con centinaia di famiglie che condividono la stessa cura.
+        </p>
       </div>
     </div>
 
-    <!-- Bio -->
-    <div class="md:col-span-2">
-      <p class="font-caption text-[9px] tracking-ultra uppercase text-salvia mb-3">La fondatrice</p>
-      <h2 class="font-heading text-3xl text-moka font-normal mb-1">Laura Ferretti</h2>
-      <p class="font-light text-xs text-moka/40 tracking-widest mb-6 uppercase">Mamma · Curatrice · Modena</p>
-      <p class="font-light text-sm text-moka/65 leading-relaxed mb-4">
-        Ho sempre creduto che la moda per bambini potesse essere bella, sostenibile e accessibile insieme.
-        Dodolí è il mio tentativo quotidiano di dimostrarlo — con ogni capo che scelgo,
-        ogni confezione regalo che preparo, ogni mamma che entra e si fida di me.
-      </p>
-      <p class="font-light text-sm text-moka/65 leading-relaxed">
-        La boutique fisica a Modena è il mio rifugio e il vostro: un posto dove prendersi il tempo,
-        toccare i tessuti, e scegliere con calma ciò che davvero vale.
-      </p>
+    <!-- Portrait -->
+    <div class="md:col-span-4 md:col-start-8">
+      <div class="aspect-[3/4] overflow-hidden bg-n-200 img-zoom mb-5">
+        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&q=85&fit=crop&crop=face"
+             alt="Laura Ferretti — fondatrice"
+             class="w-full h-full object-cover" />
+      </div>
+      <p class="font-cormorant italic text-xl text-moka">Laura Ferretti</p>
+      <p class="font-sans font-light text-[10px] tracking-px16 uppercase text-n-400 mt-1">Fondatrice · Modena</p>
     </div>
   </div>
 </section>
 
-<!-- Values -->
-<section class="max-w-5xl mx-auto py-20 px-6">
-  <div class="text-center mb-14">
-    <p class="font-caption text-[10px] tracking-ultra uppercase text-gold mb-3">Quello in cui crediamo</p>
-    <h2 class="font-display text-4xl italic text-moka">I nostri valori</h2>
-  </div>
-  <div class="grid md:grid-cols-3 gap-8">
+<!-- DIVIDER -->
+<div class="max-w-screen-xl mx-auto px-4 md:px-8 lg:px-12 border-t border-n-200"></div>
+
+<!-- VALUES -->
+<section class="max-w-screen-xl mx-auto px-4 md:px-8 lg:px-12 py-16 md:py-24">
+  <p class="font-sans font-light text-[10px] tracking-px24 uppercase text-n-400 mb-12">I nostri valori</p>
+  <div class="grid md:grid-cols-3 gap-10 md:gap-16">
     @for (v of values; track v.title) {
-      <div class="text-center px-4">
-        <div class="w-14 h-14 bg-panna border border-latte rounded-full flex items-center justify-center mx-auto mb-5 text-gold text-lg">
-          {{ v.icon }}
-        </div>
-        <h3 class="font-heading text-lg text-moka font-normal mb-3">{{ v.title }}</h3>
-        <p class="font-light text-sm text-moka/55 leading-relaxed">{{ v.desc }}</p>
+      <div>
+        <h3 class="font-cormorant font-light text-2xl text-moka mb-4">{{ v.title }}</h3>
+        <p class="font-sans font-light text-[13px] text-n-500 leading-relaxed">{{ v.body }}</p>
       </div>
     }
   </div>
 </section>
 
-<!-- Timeline -->
-<section class="bg-cipria-light/20 py-20 px-6 border-y border-latte">
-  <div class="max-w-3xl mx-auto">
-    <div class="text-center mb-14">
-      <p class="font-caption text-[10px] tracking-ultra uppercase text-gold mb-3">La nostra crescita</p>
-      <h2 class="font-display text-4xl italic text-moka">Come siamo arrivati qui</h2>
+<!-- TIMELINE — minimal list style -->
+<section class="bg-n-100 border-y border-n-200 py-16 md:py-24 px-4 md:px-8 lg:px-12">
+  <div class="max-w-screen-xl mx-auto grid md:grid-cols-12 gap-8">
+    <div class="md:col-span-3">
+      <p class="font-sans font-light text-[10px] tracking-px24 uppercase text-n-400 mb-2">Dodolí</p>
+      <h2 class="font-cormorant font-light text-3xl text-moka">Dal 2018<br>ad oggi.</h2>
     </div>
-    <div class="space-y-0">
-      @for (item of timeline; track item.year; let last = $last) {
-        <div class="flex gap-6 items-start" [class.pb-10]="!last">
-          <div class="flex flex-col items-center">
-            <div class="w-10 h-10 bg-ivory border border-gold/40 rounded-full flex items-center justify-center font-display italic text-sm text-gold flex-shrink-0">
-              {{ item.icon }}
-            </div>
-            @if (!last) {
-              <div class="w-px flex-1 bg-latte mt-2 min-h-8"></div>
-            }
-          </div>
-          <div class="pt-1.5">
-            <span class="font-caption text-[9px] tracking-ultra uppercase text-gold">{{ item.year }}</span>
-            <h4 class="font-heading text-base text-moka font-normal mt-0.5 mb-1">{{ item.title }}</h4>
-            <p class="font-light text-sm text-moka/55 leading-relaxed">{{ item.desc }}</p>
-          </div>
+    <div class="md:col-span-8 md:col-start-5 divide-y divide-n-200">
+      @for (m of milestones; track m.year) {
+        <div class="flex gap-8 items-baseline py-5">
+          <span class="font-sans font-light text-[11px] tracking-px16 text-n-400 w-12 shrink-0">{{ m.year }}</span>
+          <p class="font-sans font-light text-[13px] text-n-500 leading-relaxed">{{ m.text }}</p>
         </div>
       }
     </div>
@@ -120,18 +98,14 @@
 </section>
 
 <!-- CTA -->
-<section class="py-20 px-6 text-center bg-ivory">
-  <img src="assets/logo.svg" alt="Dodolí" class="h-16 mx-auto mb-6 opacity-40"
+<section class="max-w-screen-xl mx-auto px-4 md:px-8 lg:px-12 py-20 md:py-28 text-center">
+  <img src="assets/logo.svg" alt="Dodolí" class="h-14 mx-auto mb-8 opacity-30"
        onerror="this.src='assets/logo.png'" />
-  <h2 class="font-display text-3xl md:text-4xl italic text-moka mb-4">Vieni a trovarci</h2>
-  <p class="font-light text-sm text-moka/55 mb-8 max-w-xs mx-auto leading-relaxed">
-    Via dei Giardini 12, Modena<br>
-    Lun–Ven 9:30–13 · 15:30–19<br>
-    Sabato 9:30–13
-  </p>
+  <h2 class="font-cormorant font-light text-4xl md:text-5xl text-moka mb-3">Vieni a trovarci.</h2>
+  <p class="font-sans font-light text-[13px] text-n-400 mb-8">Via dei Giardini 12 · Modena · Lun–Sab</p>
   <a routerLink="/products"
-     class="inline-block font-body text-[11px] tracking-ultra uppercase text-moka border border-moka/30
-            px-10 py-3.5 hover:bg-moka hover:text-ivory transition-all duration-300">
+     class="inline-block font-sans font-light text-[11px] tracking-px16 uppercase text-moka
+            border border-moka/40 hover:border-moka px-10 py-3.5 transition-colors duration-300">
     Sfoglia la collezione
   </a>
 </section>

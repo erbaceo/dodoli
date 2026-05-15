@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "dodoli-boutique": {
+    "dodoli-v2": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -66,10 +66,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "dodoli-boutique:build:production"
+              "buildTarget": "dodoli-v2:build:production"
             },
             "development": {
-              "buildTarget": "dodoli-boutique:build:development"
+              "buildTarget": "dodoli-v2:build:development"
             }
           },
           "defaultConfiguration": "development"

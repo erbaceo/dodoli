@@ -10,16 +10,16 @@ import { RouterLink } from '@angular/router';
 })
 export class AboutComponent {
   values = [
-    { icon: '◇', title: 'Selezione',     desc: 'Ogni capo viene ispezionato personalmente. Se non ci piace, non lo vendiamo.' },
-    { icon: '♻', title: 'Sostenibilità', desc: 'Dare nuova vita ai vestiti non è solo romantico: è necessario. E noi ci crediamo davvero.' },
-    { icon: '♡', title: 'Comunità',      desc: 'Siamo un punto d\'incontro per famiglie di Modena che condividono i nostri valori.' },
+    { title: 'Selezione rigorosa',  body: 'Ogni capo — nuovo o usato — passa dal nostro sguardo prima di entrare in boutique. Nessun compromesso sulla qualità.' },
+    { title: 'Economia circolare',  body: 'I bambini crescono in fretta. Noi restituiamo vita a ciò che è stato amato, riducendo lo spreco senza ridurre la bellezza.' },
+    { title: 'Attenzione al dettaglio', body: 'Dal nastro sulla confezione al bigliettino scritto a mano. Ogni acquisto da Dodolí è un\'esperienza, non solo una transazione.' },
   ];
 
-  timeline = [
-    { year: '2018', icon: '✦', title: 'Il primo mercatino',  desc: 'Un tavolo nel cortile di casa, una scatola di vestitini. Tutto esaurito in due ore.' },
-    { year: '2019', icon: '◎', title: 'Il negozio apre',     desc: '40 mq in Via dei Giardini. Piccolo, curato, tutto nostro.' },
-    { year: '2021', icon: '◇', title: 'Nasce il second hand selezionato', desc: 'Iniziamo a comprare capi usati e riproporli dopo una selezione rigorosa.' },
-    { year: '2023', icon: '◈', title: 'Il packaging Dodolí', desc: 'Lanciamo le nostre confezioni regalo. Ogni scatola è un\'esperienza.' },
-    { year: '2025', icon: '★', title: 'Siamo online',        desc: 'Il sito nasce per portare Dodolí anche fuori da Modena.' },
+  milestones = [
+    { year: '2018', text: 'Primo mercatino nel cortile di casa. Tutto esaurito in due ore.' },
+    { year: '2019', text: 'Apertura del negozio fisico in Via dei Giardini, Modena.' },
+    { year: '2021', text: 'Lancio del servizio Second Hand Selezionato.' },
+    { year: '2023', text: 'Nasce il Packaging Dodolí: ogni regalo diventa un\'emozione.' },
+    { year: '2025', text: 'Apertura del sito. Dodolí arriva anche a casa tua.' },
   ];
 }
