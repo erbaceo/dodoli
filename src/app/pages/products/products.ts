@@ -1,6 +1,6 @@
 import { Component, inject, signal, computed, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DecimalPipe } from '@angular/common';
 import { ProductsService, Product } from '../../services/products';
 
 type Tab = 'new' | 'ceremony' | 'second' | 'packaging';
@@ -8,7 +8,7 @@ type Tab = 'new' | 'ceremony' | 'second' | 'packaging';
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, DecimalPipe],
   templateUrl: './products.html',
   styleUrl:    './products.scss',
 })

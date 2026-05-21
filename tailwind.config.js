@@ -4,19 +4,21 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Neutrals — the whole canvas
-        'n-50':  '#FDFBF8',
-        'n-100': '#F8F4EE',
-        'n-200': '#EDE6DA',
-        'n-300': '#DDD3C2',
-        'n-400': '#C8BAA4',
-        'n-500': '#A8937A',
-        // Accents
+        // Clean neutrals — white canvas (Smallable/Joybebe style)
+        'n-50':  '#FFFFFF',
+        'n-100': '#F5F5F5',
+        'n-200': '#E5E5E5',
+        'n-300': '#CCCCCC',
+        'n-400': '#888888',
+        'n-500': '#555555',
+        // Brand accents — kept for identity
         'moka':  '#6B4C35',
         'moka-d':'#3E2B1E',
         'gold':  '#B8955A',
         'sage':  '#7E907A',
-        'blush': '#D9B8B0',
+        'blush': '#F0D5CE',
+        // Utility
+        'dark':  '#1A1A1A',
       },
       fontFamily: {
         cormorant: ['"Cormorant Garamond"', 'Georgia', 'serif'],
