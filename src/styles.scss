@@ -9,16 +9,16 @@ html { scroll-behavior: smooth; font-size: 16px; }
 
 body {
   font-family: 'Montserrat', sans-serif;
-  background: #FDFBF8;
-  color: #3E2B1E;
+  background: #FFFFFF;
+  color: #1A1A1A;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: #FDFBF8; }
-::-webkit-scrollbar-thumb { background: #C8BAA4; }
+::-webkit-scrollbar-track { background: #F5F5F5; }
+::-webkit-scrollbar-thumb { background: #CCCCCC; }
 
 /* Cormorant utility */
 .font-cormorant { font-family: 'Cormorant Garamond', Georgia, serif; }

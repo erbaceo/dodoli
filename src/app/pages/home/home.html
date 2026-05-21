@@ -13,19 +13,18 @@
     </div>
   }
 
-  <!-- Text block — bottom-left, restrained -->
-  <div class="absolute bottom-14 left-8 md:left-16 z-10 max-w-xs md:max-w-sm">
-    <p class="font-sans font-light text-[10px] tracking-px24 uppercase text-n-100/70 mb-4">
+  <!-- Text block — bottom-left -->
+  <div class="absolute bottom-12 left-8 md:left-16 z-10 max-w-xs md:max-w-md">
+    <p class="font-sans text-[10px] tracking-px24 uppercase text-white/60 mb-3">
       Dodolí Boutique · Modena
     </p>
-    <h1 class="font-cormorant font-light italic text-4xl md:text-5xl text-n-50 leading-tight mb-6">
+    <h1 class="font-cormorant font-light italic text-4xl md:text-6xl text-white leading-tight mb-7">
       Piccole cose,<br>grandi ricordi.
     </h1>
     <a routerLink="/products"
-       class="inline-flex items-center gap-3 font-sans font-light text-[11px] tracking-px16 uppercase
-              text-n-50/80 hover:text-n-50 transition-colors duration-300 border-b border-n-50/30 hover:border-n-50/70 pb-0.5">
+       class="inline-block font-sans text-[11px] tracking-px16 uppercase
+              bg-white text-dark px-7 py-3 hover:bg-n-100 transition-colors duration-300">
       Scopri la collezione
-      <span class="text-xs">→</span>
     </a>
   </div>
 
@@ -47,10 +46,10 @@
 <!-- =========================================================
      TICKER STRIP
      ========================================================= -->
-<div class="overflow-hidden border-b border-n-200 bg-n-50">
-  <div class="ticker-track flex items-center h-10">
+<div class="overflow-hidden border-b border-n-200 bg-n-100">
+  <div class="ticker-track flex items-center h-9">
     @for (item of tickerItems; track item) {
-      <span class="whitespace-nowrap font-sans font-light text-[10px] tracking-px24 uppercase text-n-400 px-8">
+      <span class="whitespace-nowrap font-sans text-[10px] tracking-px24 uppercase text-n-500 px-8">
         {{ item }}
       </span>
     }
@@ -58,22 +57,25 @@
 </div>
 
 <!-- =========================================================
-     THREE EDITORIAL COLUMNS — Il Gufo style
+     THREE EDITORIAL COLUMNS — clean grid
      ========================================================= -->
-<section class="max-w-screen-xl mx-auto px-4 md:px-8 lg:px-12 py-16 md:py-20">
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
+<section class="max-w-screen-xl mx-auto px-4 md:px-8 lg:px-12 py-12 md:py-16">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
     @for (ed of editorials; track ed.tab) {
       <a [routerLink]="['/products']" [queryParams]="{tab: ed.tab}"
-         class="editorial-card group block relative overflow-hidden img-zoom cursor-pointer">
-        <div class="aspect-[3/4] overflow-hidden bg-n-200">
+         class="editorial-card group block cursor-pointer">
+        <div class="aspect-[4/5] overflow-hidden bg-n-100 relative img-zoom">
           <img [src]="ed.img" [alt]="ed.title" class="w-full h-full object-cover" loading="lazy" />
-        </div>
-        <div class="pt-4 pb-2">
-          <p class="font-sans font-light text-[10px] tracking-px16 uppercase text-n-400 mb-1">{{ ed.sub }}</p>
-          <div class="flex items-center justify-between">
-            <h2 class="font-cormorant italic text-xl md:text-2xl text-moka font-light">{{ ed.title }}</h2>
-            <span class="font-sans text-[10px] tracking-px8 text-n-400 group-hover:text-moka transition-colors duration-300 translate-x-0 group-hover:translate-x-1 inline-block transition-transform">→</span>
+          <!-- hover overlay -->
+          <div class="absolute inset-0 bg-dark/0 group-hover:bg-dark/20 transition-colors duration-400 flex items-end justify-center pb-6 opacity-0 group-hover:opacity-100">
+            <span class="bg-white text-dark font-sans text-[10px] tracking-px16 uppercase px-6 py-2.5">
+              Scopri
+            </span>
           </div>
+        </div>
+        <div class="pt-3 pb-1">
+          <p class="font-sans text-[9px] tracking-px16 uppercase text-n-400 mb-1">{{ ed.sub }}</p>
+          <h2 class="font-sans font-medium text-[13px] text-dark tracking-px4">{{ ed.title }}</h2>
         </div>
       </a>
     }
@@ -96,19 +98,19 @@
 
     <!-- Copy block -->
     <div class="bg-n-100 flex flex-col justify-center px-10 md:px-16 py-14 md:py-20">
-      <p class="font-sans font-light text-[10px] tracking-px24 uppercase text-n-400 mb-5">
+      <p class="font-sans text-[10px] tracking-px24 uppercase text-n-400 mb-5">
         Second Hand Selezionato
       </p>
-      <h2 class="font-cormorant font-light text-4xl md:text-5xl text-moka leading-tight mb-6">
+      <h2 class="font-cormorant font-light text-4xl md:text-5xl text-dark leading-tight mb-6">
         Ogni capo ha<br>già una storia.<br>
         <em class="italic text-n-500">Sta per iniziarne<br>un'altra.</em>
       </h2>
-      <p class="font-sans font-light text-[13px] text-n-500 leading-relaxed mb-8 max-w-sm">
+      <p class="font-sans text-[13px] text-n-500 leading-relaxed mb-8 max-w-sm">
         Selezioniamo personalmente ogni pezzo usato. Solo qualità, solo capo in perfetto stato. Perché i tuoi bambini meritano il meglio — a qualunque prezzo.
       </p>
       <a routerLink="/products" [queryParams]="{tab:'second'}"
-         class="self-start font-sans font-light text-[11px] tracking-px16 uppercase text-moka
-                border-b border-moka/40 hover:border-moka pb-0.5 transition-colors duration-300">
+         class="self-start font-sans text-[11px] tracking-px16 uppercase text-dark
+                border border-dark/30 hover:border-dark px-7 py-3 transition-colors duration-300">
         Esplora la selezione
       </a>
     </div>
@@ -126,11 +128,11 @@
       <div class="absolute inset-0 bg-moka-d/30"></div>
     </div>
     <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
-      <p class="font-sans font-light text-[10px] tracking-px24 uppercase text-n-100/60 mb-4">La collezione</p>
-      <h2 class="font-cormorant font-light italic text-4xl md:text-6xl text-n-50 mb-6">Cerimonia</h2>
+      <p class="font-sans text-[10px] tracking-px24 uppercase text-white/60 mb-4">La collezione</p>
+      <h2 class="font-cormorant font-light italic text-4xl md:text-6xl text-white mb-7">Cerimonia</h2>
       <a routerLink="/products" [queryParams]="{tab:'ceremony'}"
-         class="font-sans font-light text-[11px] tracking-px16 uppercase text-n-50
-                border border-n-50/40 hover:border-n-50 px-8 py-3 transition-colors duration-300">
+         class="font-sans text-[11px] tracking-px16 uppercase bg-white text-dark
+                px-9 py-3.5 hover:bg-n-100 transition-colors duration-300">
         Scopri
       </a>
     </div>
@@ -143,17 +145,17 @@
 <section class="max-w-screen-xl mx-auto px-4 md:px-8 lg:px-12 py-6 md:py-10 pb-16">
   <div class="grid md:grid-cols-2 gap-3 md:gap-4 items-stretch">
     <!-- Copy -->
-    <div class="bg-blush/20 flex flex-col justify-center px-10 md:px-16 py-14 md:py-20 order-2 md:order-1">
-      <p class="font-sans font-light text-[10px] tracking-px24 uppercase text-n-400 mb-5">Packaging Dodolí</p>
-      <h2 class="font-cormorant font-light text-4xl md:text-5xl text-moka leading-tight mb-6">
+    <div class="bg-blush/30 flex flex-col justify-center px-10 md:px-16 py-14 md:py-20 order-2 md:order-1">
+      <p class="font-sans text-[10px] tracking-px24 uppercase text-n-400 mb-5">Packaging Dodolí</p>
+      <h2 class="font-cormorant font-light text-4xl md:text-5xl text-dark leading-tight mb-6">
         Un regalo,<br>due emozioni.
       </h2>
-      <p class="font-sans font-light text-[13px] text-n-500 leading-relaxed mb-8 max-w-sm">
+      <p class="font-sans text-[13px] text-n-500 leading-relaxed mb-8 max-w-sm">
         Le nostre confezioni regalo trasformano ogni acquisto in un momento indimenticabile. Carta velina, nastro raso, bigliettino scritto a mano.
       </p>
       <a routerLink="/products" [queryParams]="{tab:'packaging'}"
-         class="self-start font-sans font-light text-[11px] tracking-px16 uppercase text-moka
-                border-b border-moka/40 hover:border-moka pb-0.5 transition-colors duration-300">
+         class="self-start font-sans text-[11px] tracking-px16 uppercase text-dark
+                border border-dark/30 hover:border-dark px-7 py-3 transition-colors duration-300">
         Scopri il packaging
       </a>
     </div>
