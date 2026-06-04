@@ -1,0 +1,15 @@
+.tab-on  { color: #1A1A1A; border-color: #1A1A1A; font-weight: 500; }
+.tab-off { color: #888888; border-color: transparent;
+           &:hover { color: #1A1A1A; } }
+
+.product-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(2, 1fr);
+  @media (min-width: 640px)  { gap: 1.5rem; }
+  @media (min-width: 768px)  { grid-template-columns: repeat(3, 1fr); }
+  @media (min-width: 1280px) { grid-template-columns: repeat(4, 1fr); }
+}
+
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

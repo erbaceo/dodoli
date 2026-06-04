@@ -1,0 +1,15 @@
+# Compiled output
+/dist
+/tmp
+/out-tsc
+
+# Node
+node_modules/
+
+# Angular cache
+/.angular/cache
+
+# Misc
+/coverage
+.sass-cache/
+__screenshots__/

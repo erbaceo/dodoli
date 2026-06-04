@@ -1,0 +1,23 @@
+.hero-scrim {
+  background: linear-gradient(
+    to top,
+    rgba(30,18,10,0.55) 0%,
+    rgba(30,18,10,0.10) 50%,
+    rgba(30,18,10,0.05) 100%
+  );
+}
+
+/* Ticker */
+.ticker-track {
+  width: max-content;
+  animation: ticker 30s linear infinite;
+}
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Duplicate items for seamless loop */
+.ticker-track::after {
+  content: attr(data-content);
+}
