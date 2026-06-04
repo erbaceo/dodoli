@@ -1,0 +1,63 @@
+<!-- Header -->
+<div class="border-b border-n-200 bg-n-50">
+  <div class="max-w-screen-xl mx-auto px-6 md:px-12 py-14">
+    <p class="font-sans text-[10px] tracking-px24 uppercase text-n-400 mb-3">Dodolí</p>
+    <h1 class="font-cormorant font-light italic text-5xl md:text-6xl text-dark mb-4">Live Shopping</h1>
+    <p class="font-sans text-[13px] text-n-500 max-w-lg leading-relaxed">
+      Ogni settimana dal vivo su Instagram. Prezzi esclusivi, pezzi unici, e la stessa cura che trovi in boutique — direttamente a casa tua.
+    </p>
+  </div>
+</div>
+
+<!-- Schedule -->
+<section class="max-w-screen-xl mx-auto px-6 md:px-12 py-16">
+  <h2 class="font-sans text-[10px] tracking-px24 uppercase text-n-400 mb-8">Le prossime live</h2>
+  <div class="grid md:grid-cols-3 gap-6">
+    @for (s of schedule; track s.day) {
+      <div class="border border-n-200 p-8 bg-n-50 group hover:border-moka transition-colors duration-300">
+        <p class="font-cormorant italic text-3xl text-dark mb-1">{{ s.day }}</p>
+        <p class="font-sans font-medium text-[11px] tracking-px8 text-moka mb-4">{{ s.time }}</p>
+        <p class="font-sans text-[13px] text-n-500 leading-relaxed mb-6">{{ s.theme }}</p>
+        <button class="flex items-center gap-2 font-sans text-[10px] tracking-px16 uppercase text-dark border border-n-200 hover:border-moka hover:text-moka px-4 py-2.5 transition-colors duration-200">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"/>
+          </svg>
+          Promemoria
+        </button>
+      </div>
+    }
+  </div>
+</section>
+
+<!-- How it works -->
+<section class="bg-n-100 border-t border-b border-n-200 py-16">
+  <div class="max-w-screen-xl mx-auto px-6 md:px-12">
+    <h2 class="font-sans text-[10px] tracking-px24 uppercase text-n-400 mb-10 text-center">Come funziona</h2>
+    <div class="grid md:grid-cols-3 gap-10">
+      @for (s of steps; track s.n) {
+        <div class="text-center">
+          <div class="font-cormorant italic text-5xl text-n-300 mb-4">{{ s.n }}</div>
+          <h3 class="font-sans font-medium text-[13px] text-dark mb-3">{{ s.title }}</h3>
+          <p class="font-sans text-[12px] text-n-500 leading-relaxed">{{ s.body }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="max-w-screen-xl mx-auto px-6 md:px-12 py-16 text-center">
+  <h2 class="font-cormorant font-light italic text-4xl md:text-5xl text-dark mb-6">
+    Sei pronta per la prossima live?
+  </h2>
+  <p class="font-sans text-[13px] text-n-500 mb-8 max-w-md mx-auto leading-relaxed">
+    Seguici su Instagram per non perdere neanche un capo. Ogni live è un'occasione unica.
+  </p>
+  <a href="https://www.instagram.com" target="_blank" rel="noopener"
+     class="inline-flex items-center gap-3 font-sans text-[11px] tracking-px16 uppercase bg-dark text-white px-8 py-4 hover:bg-moka-d transition-colors duration-300">
+    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+    </svg>
+    Seguici su Instagram
+  </a>
+</section>

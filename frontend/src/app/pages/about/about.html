@@ -1,0 +1,104 @@
+<!-- HERO -->
+<section class="relative pt-0">
+  <div class="w-full h-[60vh] md:h-[70vh] overflow-hidden bg-n-200">
+    <img src="https://images.unsplash.com/photo-1544776193-352d25ca82cd?w=1600&q=90&fit=crop"
+         alt="Chi Siamo — Dodolí Boutique"
+         class="w-full h-full object-cover object-center" />
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white/90"></div>
+  </div>
+  <div class="max-w-screen-xl mx-auto px-4 md:px-8 lg:px-12">
+    <div class="relative -mt-24 md:-mt-32 bg-white max-w-xl px-8 md:px-12 py-10 md:py-14">
+      <p class="font-sans text-[10px] tracking-px24 uppercase text-n-400 mb-4">Chi Siamo</p>
+      <h1 class="font-cormorant font-light text-4xl md:text-5xl text-dark leading-snug">
+        Nata per amore.<br>
+        <em class="italic text-moka">Cresciuta con voi.</em>
+      </h1>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="max-w-screen-xl mx-auto px-4 md:px-8 lg:px-12 py-16 md:py-24">
+  <div class="grid md:grid-cols-12 gap-8 md:gap-12 items-start">
+    <div class="md:col-span-5 md:col-start-2">
+      <p class="font-sans text-[10px] tracking-px24 uppercase text-n-400 mb-6">La storia di Maria</p>
+      <div class="space-y-5 font-sans text-[14px] text-n-500 leading-loose font-light">
+        <p>
+          Era una mattina di settembre del 2018. Stavo svuotando l'armadio di mia figlia — due anni appena compiuti — e davanti a me c'era una montagna di vestitini quasi nuovi, lavati con cura, profumati di buono.
+        </p>
+        <p class="font-cormorant italic text-xl text-moka leading-snug">
+          &ldquo;Questi non sono stracci.<br>Sono ricordi.&rdquo;
+        </p>
+        <p>
+          Dodolí è nata da una scatola in un cortile. Oggi è una boutique nel centro di Modena, con centinaia di famiglie che condividono la stessa cura per le piccole cose.
+        </p>
+      </div>
+    </div>
+    <div class="md:col-span-4 md:col-start-8">
+      <div class="aspect-[3/4] overflow-hidden bg-n-200 mb-5">
+        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&q=85&fit=crop&crop=face"
+             alt="Maria — fondatrice" class="w-full h-full object-cover" />
+      </div>
+      <p class="font-cormorant italic text-xl text-moka">Maria</p>
+      <p class="font-sans text-[10px] tracking-px16 uppercase text-n-400 mt-1">Fondatrice · Modena</p>
+    </div>
+  </div>
+</section>
+
+<div class="max-w-screen-xl mx-auto px-4 md:px-8 lg:px-12 border-t border-n-200"></div>
+
+<!-- VALUES -->
+<section class="max-w-screen-xl mx-auto px-4 md:px-8 lg:px-12 py-16 md:py-20">
+  <p class="font-sans text-[10px] tracking-px24 uppercase text-n-400 mb-12">I nostri valori</p>
+  <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
+    @for (v of values; track v.title) {
+      <div>
+        <div class="font-cormorant italic text-3xl text-moka mb-4">{{ v.icon }}</div>
+        <h3 class="font-sans font-medium text-[13px] text-dark mb-3">{{ v.title }}</h3>
+        <p class="font-sans text-[12px] text-n-500 leading-relaxed">{{ v.body }}</p>
+      </div>
+    }
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="bg-n-100 border-y border-n-200 py-16 md:py-20">
+  <div class="max-w-screen-xl mx-auto px-4 md:px-8 lg:px-12 grid md:grid-cols-12 gap-8">
+    <div class="md:col-span-3">
+      <p class="font-sans text-[10px] tracking-px24 uppercase text-n-400 mb-2">Dodolí</p>
+      <h2 class="font-cormorant font-light text-3xl text-moka">Dal 2018<br>ad oggi.</h2>
+    </div>
+    <div class="md:col-span-8 md:col-start-5 divide-y divide-n-200">
+      @for (m of milestones; track m.year) {
+        <div class="flex gap-8 items-baseline py-5">
+          <span class="font-sans text-[11px] tracking-px16 text-n-400 w-12 shrink-0">{{ m.year }}</span>
+          <p class="font-sans text-[13px] text-n-500 leading-relaxed">{{ m.text }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL -->
+<section class="max-w-screen-xl mx-auto px-4 md:px-8 lg:px-12 py-16 text-center">
+  <p class="font-sans text-[10px] tracking-px24 uppercase text-n-400 mb-6">Seguici su Instagram</p>
+  <a href="https://www.instagram.com" target="_blank" rel="noopener"
+     class="inline-flex items-center gap-3 font-sans text-[11px] tracking-px16 uppercase text-dark border border-n-200 hover:border-dark px-8 py-3.5 transition-colors duration-300">
+    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+    </svg>
+    &#64;dodoli_boutique
+  </a>
+</section>
+
+<!-- CTA -->
+<section class="bg-blush/20 border-t border-n-200 py-16">
+  <div class="max-w-screen-xl mx-auto px-4 md:px-8 lg:px-12 text-center">
+    <h2 class="font-cormorant font-light text-4xl md:text-5xl text-dark mb-4">Vieni a trovarci.</h2>
+    <p class="font-sans text-[13px] text-n-400 mb-8">Via dei Giardini 12 · Modena · Lun–Sab</p>
+    <a routerLink="/nuovi-arrivi"
+       class="inline-block font-sans text-[11px] tracking-px16 uppercase text-dark border border-dark/30 hover:border-dark px-10 py-3.5 transition-colors duration-300">
+      Sfoglia la collezione
+    </a>
+  </div>
+</section>

@@ -1,0 +1,64 @@
+<!-- Header -->
+<div class="border-b border-n-200 bg-n-50">
+  <div class="max-w-screen-xl mx-auto px-6 md:px-12 py-14">
+    <p class="font-sans text-[10px] tracking-px24 uppercase text-n-400 mb-3">Seconda Storia</p>
+    <h1 class="font-cormorant font-light italic text-5xl md:text-6xl text-dark mb-4">Affida una Seconda Storia</h1>
+    <p class="font-sans text-[13px] text-n-500 max-w-lg leading-relaxed">
+      I tuoi bambini sono cresciuti e i loro capi meritano una nuova vita. Affidaceli: ci pensiamo noi alla selezione, alla foto, alla vendita.
+    </p>
+  </div>
+</div>
+
+<!-- Steps -->
+<section class="max-w-screen-xl mx-auto px-6 md:px-12 py-16">
+  <h2 class="font-sans text-[10px] tracking-px24 uppercase text-n-400 mb-12">Come funziona</h2>
+  <div class="space-y-0 divide-y divide-n-200">
+    @for (s of steps; track s.n) {
+      <div class="grid md:grid-cols-12 gap-4 md:gap-8 py-8 items-start">
+        <div class="md:col-span-1">
+          <span class="font-cormorant italic text-2xl text-moka">{{ s.n }}</span>
+        </div>
+        <div class="md:col-span-4">
+          <h3 class="font-sans font-medium text-[15px] text-dark">{{ s.title }}</h3>
+        </div>
+        <div class="md:col-span-6">
+          <p class="font-sans text-[13px] text-n-500 leading-relaxed">{{ s.body }}</p>
+        </div>
+      </div>
+    }
+  </div>
+</section>
+
+<!-- Benefits -->
+<section class="bg-n-100 border-t border-b border-n-200 py-16">
+  <div class="max-w-screen-xl mx-auto px-6 md:px-12">
+    <div class="grid md:grid-cols-3 gap-8 text-center">
+      <div>
+        <div class="font-cormorant italic text-4xl text-moka mb-3">50%</div>
+        <p class="font-sans text-[12px] text-n-500">del ricavato è tuo</p>
+      </div>
+      <div>
+        <div class="font-cormorant italic text-4xl text-moka mb-3">0€</div>
+        <p class="font-sans text-[12px] text-n-500">di costi fissi o anticipi</p>
+      </div>
+      <div>
+        <div class="font-cormorant italic text-4xl text-moka mb-3">+10%</div>
+        <p class="font-sans text-[12px] text-n-500">bonus in credito negozio</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="max-w-screen-xl mx-auto px-6 md:px-12 py-16 text-center">
+  <h2 class="font-cormorant font-light italic text-4xl md:text-5xl text-dark mb-6">
+    Pronta ad affidare i tuoi capi?
+  </h2>
+  <p class="font-sans text-[13px] text-n-500 mb-8 max-w-md mx-auto leading-relaxed">
+    Scrivici con la lista dei capi. Valutiamo entro 48 ore e ti diciamo cosa possiamo accettare.
+  </p>
+  <a href="mailto:info@dodoli.it"
+     class="inline-block font-sans text-[11px] tracking-px16 uppercase bg-dark text-white px-10 py-4 hover:bg-moka-d transition-colors duration-300">
+    Inizia ora
+  </a>
+</section>

@@ -1,0 +1,224 @@
+<!-- Page header -->
+<div class="border-b border-n-200 bg-n-50">
+  <div class="max-w-screen-2xl mx-auto px-4 md:px-8 lg:px-12 py-10">
+    <h1 class="font-cormorant font-light text-4xl md:text-5xl text-dark">{{ title() }}</h1>
+    <p class="font-sans text-[12px] text-n-400 tracking-px4 mt-2">{{ subtitle() }}</p>
+  </div>
+</div>
+
+<div class="max-w-screen-2xl mx-auto px-4 md:px-8 lg:px-12 py-8">
+  <div class="flex gap-8">
+
+    <!-- Sidebar -->
+    <aside class="hidden lg:block w-52 xl:w-60 shrink-0">
+      <div class="sticky top-20 space-y-8">
+
+        <!-- Categoria -->
+        <div>
+          <h3 class="font-sans text-[10px] tracking-px16 uppercase text-n-400 mb-4">Categoria</h3>
+          <div class="space-y-2.5">
+            <label class="flex items-center gap-2.5 cursor-pointer group">
+              <input type="checkbox" class="w-3.5 h-3.5 accent-dark"
+                     [checked]="selectedCategories().length === 0"
+                     (change)="clearFilters()"/>
+              <span class="font-sans text-[12px] text-dark group-hover:text-moka transition-colors">Tutti</span>
+            </label>
+            @for (c of categories; track c) {
+              <label class="flex items-center gap-2.5 cursor-pointer group">
+                <input type="checkbox" class="w-3.5 h-3.5 accent-dark"
+                       [checked]="selectedCategories().includes(c)"
+                       (change)="toggleCategory(c)"/>
+                <span class="font-sans text-[12px] text-dark group-hover:text-moka transition-colors">{{ c }}</span>
+              </label>
+            }
+          </div>
+        </div>
+
+        <!-- Età -->
+        <div>
+          <h3 class="font-sans text-[10px] tracking-px16 uppercase text-n-400 mb-4">Età</h3>
+          <div class="space-y-2.5">
+            @for (a of ageGroups; track a) {
+              <label class="flex items-center gap-2.5 cursor-pointer group">
+                <input type="checkbox" class="w-3.5 h-3.5 accent-dark"
+                       [checked]="selectedAges().includes(a)"
+                       (change)="toggleAge(a)"/>
+                <span class="font-sans text-[12px] text-dark group-hover:text-moka transition-colors">{{ a }}</span>
+              </label>
+            }
+          </div>
+        </div>
+
+        <!-- Taglia -->
+        <div>
+          <h3 class="font-sans text-[10px] tracking-px16 uppercase text-n-400 mb-4">Taglia</h3>
+          <div class="flex flex-wrap gap-1.5">
+            @for (s of sizes; track s) {
+              <button (click)="toggleSize(s)"
+                      class="font-sans text-[10px] w-10 h-8 border transition-colors duration-200"
+                      [class.bg-dark]="selectedSizes().includes(s)"
+                      [class.text-white]="selectedSizes().includes(s)"
+                      [class.border-dark]="selectedSizes().includes(s)"
+                      [class.border-n-200]="!selectedSizes().includes(s)"
+                      [class.text-n-500]="!selectedSizes().includes(s)">
+                {{ s }}
+              </button>
+            }
+          </div>
+        </div>
+
+        @if (activeFiltersCount() > 0) {
+          <button (click)="clearFilters()"
+                  class="font-sans text-[11px] tracking-px8 uppercase text-moka hover:text-dark transition-colors">
+            Rimuovi filtri ({{ activeFiltersCount() }})
+          </button>
+        }
+      </div>
+    </aside>
+
+    <!-- Products area -->
+    <div class="flex-1 min-w-0">
+
+      <!-- Mobile filter toggle -->
+      <div class="flex items-center justify-between mb-6 lg:hidden">
+        <p class="font-sans text-[12px] text-n-400">{{ products().length }} capi</p>
+        <button (click)="sidebarOpen.update(v=>!v)"
+                class="flex items-center gap-2 font-sans text-[11px] tracking-px8 uppercase text-dark border border-n-200 px-4 py-2">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75"/>
+          </svg>
+          Filtri @if (activeFiltersCount() > 0) { ({{ activeFiltersCount() }}) }
+        </button>
+      </div>
+
+      <!-- Mobile sidebar drawer -->
+      @if (sidebarOpen()) {
+        <div class="fixed inset-0 z-50 flex lg:hidden">
+          <div class="absolute inset-0 bg-dark/40" (click)="sidebarOpen.set(false)"></div>
+          <div class="relative bg-white w-72 h-full overflow-y-auto p-6 space-y-8">
+            <div class="flex justify-between items-center">
+              <h2 class="font-sans text-[11px] tracking-px16 uppercase text-dark">Filtri</h2>
+              <button (click)="sidebarOpen.set(false)" class="text-n-400 p-1">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" d="M5 5l14 14M5 19L19 5"/>
+                </svg>
+              </button>
+            </div>
+            <div>
+              <h3 class="font-sans text-[10px] tracking-px16 uppercase text-n-400 mb-3">Categoria</h3>
+              <div class="space-y-2.5">
+                @for (c of categories; track c) {
+                  <label class="flex items-center gap-2.5 cursor-pointer">
+                    <input type="checkbox" class="w-3.5 h-3.5 accent-dark"
+                           [checked]="selectedCategories().includes(c)" (change)="toggleCategory(c)"/>
+                    <span class="font-sans text-[12px] text-dark">{{ c }}</span>
+                  </label>
+                }
+              </div>
+            </div>
+            <div>
+              <h3 class="font-sans text-[10px] tracking-px16 uppercase text-n-400 mb-3">Età</h3>
+              <div class="space-y-2.5">
+                @for (a of ageGroups; track a) {
+                  <label class="flex items-center gap-2.5 cursor-pointer">
+                    <input type="checkbox" class="w-3.5 h-3.5 accent-dark"
+                           [checked]="selectedAges().includes(a)" (change)="toggleAge(a)"/>
+                    <span class="font-sans text-[12px] text-dark">{{ a }}</span>
+                  </label>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+
+      <!-- Desktop count -->
+      <div class="hidden lg:flex justify-end mb-6">
+        <p class="font-sans text-[12px] text-n-400">{{ products().length }} capi</p>
+      </div>
+
+      @if (loading()) {
+        <div class="flex justify-center items-center py-40">
+          <div class="w-6 h-6 border border-n-300 border-t-moka rounded-full animate-spin"></div>
+        </div>
+      }
+
+      @if (!loading() && !error()) {
+        <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5">
+          @for (p of products(); track p.id) {
+            <div class="group cursor-pointer" (click)="open(p)">
+              <div class="aspect-[3/4] overflow-hidden bg-n-100 relative mb-3">
+                <img [src]="p.thumbnail" [alt]="p.title"
+                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                     loading="lazy" />
+                <div class="absolute inset-0 flex items-end justify-center pb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span class="bg-white text-dark font-sans text-[10px] tracking-px16 uppercase px-5 py-2.5 shadow-sm">Vedi dettaglio</span>
+                </div>
+              </div>
+              <p class="font-sans text-[9px] tracking-px16 uppercase text-n-400 mb-1 truncate">{{ p.category }}</p>
+              <p class="font-sans font-medium text-[13px] text-dark line-clamp-2 leading-snug mb-1.5">{{ p.title }}</p>
+              <div class="flex items-baseline gap-2">
+                <span class="font-sans font-medium text-[13px] text-dark">€ {{ price(p) }}</span>
+                @if (p.discountPercentage > 1) {
+                  <span class="font-sans text-[11px] text-n-400 line-through">€ {{ p.price }}</span>
+                  <span class="font-sans text-[10px] text-moka font-medium">-{{ p.discountPercentage | number:'1.0-0' }}%</span>
+                }
+              </div>
+            </div>
+          }
+        </div>
+
+        @if (products().length === 0) {
+          <div class="text-center py-40">
+            <p class="font-cormorant italic text-3xl text-n-400">Nessun prodotto trovato</p>
+            <button (click)="clearFilters()" class="mt-6 font-sans text-[11px] tracking-px8 uppercase text-moka hover:underline">
+              Rimuovi tutti i filtri
+            </button>
+          </div>
+        }
+      }
+    </div>
+  </div>
+</div>
+
+<!-- MODAL -->
+@if (modal()) {
+  <div class="fixed inset-0 z-50 flex items-center justify-center" (click)="close()">
+    <div class="absolute inset-0 bg-dark/60 backdrop-blur-sm"></div>
+    <div class="relative bg-white w-full max-w-3xl max-h-[92vh] overflow-y-auto shadow-2xl m-4" (click)="$event.stopPropagation()">
+      <button (click)="close()" class="absolute top-4 right-4 z-10 p-2 text-n-400 hover:text-dark transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" d="M5 5l14 14M5 19L19 5"/>
+        </svg>
+      </button>
+      <div class="grid md:grid-cols-2">
+        <div class="bg-n-100 aspect-square md:aspect-auto">
+          <img [src]="modal()!.images?.[0] || modal()!.thumbnail" [alt]="modal()!.title" class="w-full h-full object-cover" />
+        </div>
+        <div class="p-8 md:p-10 flex flex-col gap-6">
+          <div>
+            <p class="font-sans text-[9px] tracking-px24 uppercase text-n-400 mb-3">{{ modal()!.category }}</p>
+            <h2 class="font-sans font-medium text-xl text-dark leading-snug mb-4">{{ modal()!.title }}</h2>
+            <p class="font-sans text-[13px] text-n-500 leading-relaxed">{{ modal()!.description }}</p>
+          </div>
+          <div class="border-t border-n-200 pt-6">
+            <div class="flex items-baseline gap-3 mb-6">
+              <span class="font-sans font-semibold text-2xl text-dark">€ {{ price(modal()!) }}</span>
+              @if (modal()!.discountPercentage > 1) {
+                <span class="font-sans text-sm text-n-400 line-through">€ {{ modal()!.price }}</span>
+                <span class="font-sans text-[11px] font-medium text-moka">-{{ modal()!.discountPercentage | number:'1.0-0' }}%</span>
+              }
+            </div>
+            <div class="bg-n-100 p-5 border border-n-200">
+              <p class="font-sans font-medium text-[11px] tracking-px8 text-dark mb-1">Disponibile in Boutique</p>
+              <p class="font-sans text-[11px] text-n-400 mb-4">Via dei Giardini 12, Modena</p>
+              <a href="mailto:info@dodoli.it" class="inline-block font-sans text-[11px] tracking-px16 uppercase text-dark border border-dark/30 hover:border-dark px-5 py-2.5 transition-colors duration-200">
+                Richiedi informazioni
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+}
