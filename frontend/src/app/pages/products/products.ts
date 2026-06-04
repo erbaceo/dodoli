@@ -1,14 +1,19 @@
 import { Component, inject, signal, computed, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule, DecimalPipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { ProductsService, Product } from '../../services/products';
 
-type Tab = 'new' | 'ceremony' | 'second' | 'packaging';
+type Mode = 'new' | 'second';
+
+const AGE_GROUPS = ['0-12 mesi','1-2 anni','2-3 anni','3-4 anni','4-5 anni','5-6 anni','6-8 anni','8-10 anni','10-12 anni'];
+const CATEGORIES = ['Abbigliamento','Cerimonia','Accessori'];
+const SIZES = ['50','56','62','68','74','80','86','92','98','104','110','116','122','128','134','140'];
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CommonModule, DecimalPipe],
+  imports: [CommonModule, DecimalPipe, RouterLink],
   templateUrl: './products.html',
   styleUrl:    './products.scss',
 })
@@ -16,41 +21,64 @@ export class ProductsComponent implements OnInit {
   private svc   = inject(ProductsService);
   private route = inject(ActivatedRoute);
 
-  all     = signal<Product[]>([]);
-  loading = signal(true);
-  error   = signal<string | null>(null);
-  tab     = signal<Tab>('new');
-  modal   = signal<Product | null>(null);
+  all         = signal<Product[]>([]);
+  loading     = signal(true);
+  error       = signal<string|null>(null);
+  modal       = signal<Product|null>(null);
+  mode        = signal<Mode>('new');
+  sidebarOpen = signal(false);
 
-  tabs: { key: Tab; label: string; desc: string }[] = [
-    { key: 'new',       label: 'Nuovi Arrivi',            desc: 'Le ultime novità in boutique' },
-    { key: 'ceremony',  label: 'Cerimonia',               desc: 'Per i momenti indimenticabili' },
-    { key: 'second',    label: 'Second Hand Selezionato', desc: 'Pezzi unici, curati con amore' },
-    { key: 'packaging', label: 'Packaging Dodolí',        desc: 'Confezioni regalo esclusive' },
-  ];
+  selectedAges       = signal<string[]>([]);
+  selectedCategories = signal<string[]>([]);
+  selectedSizes      = signal<string[]>([]);
 
-  products = computed(() => {
+  ageGroups  = AGE_GROUPS;
+  categories = CATEGORIES;
+  sizes      = SIZES;
+
+  title    = computed(() => this.mode() === 'new' ? 'Nuovi Arrivi' : 'Seconda Storia');
+  subtitle = computed(() => this.mode() === 'new'
+    ? 'Le ultime novità selezionate per te'
+    : 'Capi di seconda mano selezionati con cura');
+
+  baseProducts = computed(() => {
     const p = this.all();
-    switch (this.tab()) {
-      case 'new':       return p.filter((_, i) => i % 4 !== 0).slice(0, 24);
-      case 'ceremony':  return p.filter(x => ['womens-dresses','tops-womens','mens-suits'].includes(x.category)).slice(0, 24);
-      case 'second':    return p.filter((_, i) => i % 3 === 0).slice(0, 24);
-      case 'packaging': return p.filter(x => x.category.includes('beauty') || x.category.includes('fragrances') || x.category.includes('skin')).slice(0, 20);
-    }
+    return this.mode() === 'new'
+      ? p.filter((_, i) => i % 4 !== 0).slice(0, 40)
+      : p.filter((_, i) => i % 3 === 0).slice(0, 40);
   });
 
-  currentTab = computed(() => this.tabs.find(t => t.key === this.tab())!);
+  products = computed(() => {
+    let p = this.baseProducts();
+    const cats = this.selectedCategories();
+    if (cats.length) {
+      p = p.filter(x => {
+        if (cats.includes('Cerimonia') && ['womens-dresses','mens-suits','tops-womens'].includes(x.category)) return true;
+        if (cats.includes('Accessori') && ['sunglasses','womens-watches','mens-watches','womens-bags','womens-jewellery'].includes(x.category)) return true;
+        if (cats.includes('Abbigliamento') && !['sunglasses','womens-watches','mens-watches','womens-bags','womens-jewellery','womens-dresses','mens-suits','tops-womens'].includes(x.category)) return true;
+        return false;
+      });
+    }
+    return p;
+  });
+
+  activeFiltersCount = computed(() =>
+    this.selectedAges().length + this.selectedCategories().length + this.selectedSizes().length
+  );
 
   ngOnInit() {
-    this.route.queryParams.subscribe(p => {
-      const t = p['tab'] as Tab;
-      if (t && this.tabs.find(x => x.key === t)) this.tab.set(t);
-    });
+    const m = this.route.snapshot.data['mode'] as Mode;
+    if (m) this.mode.set(m);
     this.svc.getAll().subscribe({
-      next: r  => { this.all.set(r.products); this.loading.set(false); },
-      error: () => { this.error.set('Errore nel caricamento.'); this.loading.set(false); }
+      next:  r  => { this.all.set(r.products); this.loading.set(false); },
+      error: () => { this.error.set('Errore nel caricamento.'); this.loading.set(false); },
     });
   }
+
+  toggleAge(a: string)      { this.selectedAges.update(v => v.includes(a) ? v.filter(x=>x!==a) : [...v,a]); }
+  toggleCategory(c: string) { this.selectedCategories.update(v => v.includes(c) ? v.filter(x=>x!==c) : [...v,c]); }
+  toggleSize(s: string)     { this.selectedSizes.update(v => v.includes(s) ? v.filter(x=>x!==s) : [...v,s]); }
+  clearFilters() { this.selectedAges.set([]); this.selectedCategories.set([]); this.selectedSizes.set([]); }
 
   price(p: Product) { return Math.round(p.price * (1 - p.discountPercentage / 100)); }
   open(p: Product)  { this.modal.set(p); }
