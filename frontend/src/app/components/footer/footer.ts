@@ -23,9 +23,9 @@ import { RouterLink } from '@angular/router';
           <div>
             <p class="font-sans font-medium text-[10px] tracking-px24 uppercase text-white/40 mb-5">Collezione</p>
             <ul class="space-y-3">
-              @for (l of collection; track l) {
+              @for (l of collection; track l.label) {
                 <li>
-                  <a [routerLink]="['/products']" [queryParams]="{tab: l.key}"
+                  <a [routerLink]="l.path"
                      class="font-sans text-[12px] text-white/70 hover:text-white transition-colors duration-200">
                     {{ l.label }}
                   </a>
@@ -38,7 +38,7 @@ import { RouterLink } from '@angular/router';
           <div>
             <p class="font-sans font-medium text-[10px] tracking-px24 uppercase text-white/40 mb-5">Informazioni</p>
             <ul class="space-y-3">
-              @for (l of info; track l) {
+              @for (l of info; track l.label) {
                 <li>
                   <a [routerLink]="l.path"
                      class="font-sans text-[12px] text-white/70 hover:text-white transition-colors duration-200">
@@ -49,7 +49,7 @@ import { RouterLink } from '@angular/router';
             </ul>
           </div>
 
-          <!-- Contatti -->
+          <!-- Negozio -->
           <div>
             <p class="font-sans font-medium text-[10px] tracking-px24 uppercase text-white/40 mb-5">Il Negozio</p>
             <address class="not-italic font-sans text-[12px] text-white/60 leading-relaxed space-y-1">
@@ -80,13 +80,13 @@ import { RouterLink } from '@angular/router';
 })
 export class FooterComponent {
   collection = [
-    { key: 'new',       label: 'Nuovi Arrivi' },
-    { key: 'ceremony',  label: 'Cerimonia' },
-    { key: 'second',    label: 'Second Hand' },
-    { key: 'packaging', label: 'Packaging' },
+    { path: '/nuovi-arrivi',   label: 'Nuovi Arrivi' },
+    { path: '/seconda-storia', label: 'Seconda Storia' },
+    { path: '/live',           label: 'Live Shopping' },
+    { path: '/scatola',        label: 'Scatola Dodolí' },
   ];
   info = [
-    { path: '/about', label: 'Chi Siamo' },
-    { path: '/about', label: 'Contatti' },
+    { path: '/chi-siamo', label: 'Chi Siamo' },
+    { path: '/affida',    label: 'Affida una Seconda Storia' },
   ];
 }
