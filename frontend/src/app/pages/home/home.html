@@ -1,57 +1,42 @@
 <!-- =========================================================
-     HERO — full viewport, clean crossfade carousel
+     HERO
      ========================================================= -->
 <section class="hero relative h-screen overflow-hidden bg-n-200">
-
-  <!-- Slides -->
   @for (s of slides; track s.url; let i = $index) {
     <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out"
-         [class.opacity-100]="current() === i"
-         [class.opacity-0]="current() !== i">
+         [class.opacity-100]="current() === i" [class.opacity-0]="current() !== i">
       <img [src]="s.url" class="w-full h-full object-cover" [style.object-position]="s.pos" />
-      <div class="hero-scrim absolute inset-0"></div>
+      <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(0,0,0,.45) 0%,transparent 60%)"></div>
     </div>
   }
-
-  <!-- Text block — bottom-left -->
   <div class="absolute bottom-12 left-8 md:left-16 z-10 max-w-xs md:max-w-md">
-    <p class="font-sans text-[10px] tracking-px24 uppercase text-white/60 mb-3">
-      Dodolí Boutique · Modena
-    </p>
+    <p class="font-sans text-[10px] tracking-px24 uppercase text-white/60 mb-3">Dodolí Boutique · Modena</p>
     <h1 class="font-cormorant font-light italic text-4xl md:text-6xl text-white leading-tight mb-7">
       Piccole cose,<br>grandi ricordi.
     </h1>
-    <a routerLink="/products"
-       class="inline-block font-sans text-[11px] tracking-px16 uppercase
-              bg-white text-dark px-7 py-3 hover:bg-n-100 transition-colors duration-300">
+    <a routerLink="/nuovi-arrivi"
+       class="inline-block font-sans text-[11px] tracking-px16 uppercase bg-white text-dark px-7 py-3 hover:bg-n-100 transition-colors duration-300">
       Scopri la collezione
     </a>
   </div>
-
-  <!-- Slide counter — bottom right -->
   <div class="absolute bottom-14 right-8 md:right-16 z-10 flex items-center gap-3">
     @for (s of slides; track s.url; let i = $index) {
-      <button (click)="goTo(i)"
-              class="block transition-all duration-500"
-              [class.w-6]="current() === i"
-              [class.w-2]="current() !== i"
-              style="height:1px; border:none; cursor:pointer;"
-              [class.bg-n-50]="current() === i"
-              [class.bg-n-50/30]="current() !== i">
+      <button (click)="goTo(i)" class="block transition-all duration-500"
+              [style.width]="current()===i?'24px':'8px'"
+              style="height:1px;border:none;cursor:pointer;"
+              [class.bg-white]="current()===i" [class.bg-white/30]="current()!==i">
       </button>
     }
   </div>
 </section>
 
 <!-- =========================================================
-     TICKER STRIP
+     TICKER
      ========================================================= -->
 <div class="overflow-hidden border-b border-n-200 bg-n-100">
   <div class="ticker-track flex items-center h-9">
     @for (item of tickerItems; track item) {
-      <span class="whitespace-nowrap font-sans text-[10px] tracking-px24 uppercase text-n-500 px-8">
-        {{ item }}
-      </span>
+      <span class="whitespace-nowrap font-sans text-[10px] tracking-px24 uppercase text-n-500 px-8">{{ item }}</span>
     }
   </div>
 </div>
@@ -81,23 +66,47 @@
 </section>
 
 <!-- =========================================================
-     THREE EDITORIAL COLUMNS — clean grid
+     WELCOME — image + text
      ========================================================= -->
-<section class="max-w-screen-xl mx-auto px-4 md:px-8 lg:px-12 py-12 md:py-16">
+<section class="max-w-screen-xl mx-auto px-4 md:px-8 lg:px-12 py-16 md:py-20">
+  <div class="grid md:grid-cols-2 gap-6 md:gap-10 items-center">
+    <div class="aspect-[4/5] overflow-hidden bg-n-200">
+      <img src="https://images.unsplash.com/photo-1544776193-352d25ca82cd?w=900&q=90&fit=crop"
+           alt="Benvenuta da Dodolí" class="w-full h-full object-cover" loading="lazy" />
+    </div>
+    <div class="md:px-8">
+      <p class="font-sans text-[10px] tracking-px24 uppercase text-n-400 mb-5">Benvenuta da Dodolí</p>
+      <h2 class="font-cormorant font-light text-4xl md:text-5xl text-dark leading-tight mb-6">
+        Una boutique<br>per bambini,<br>
+        <em class="italic text-moka">con cuore.</em>
+      </h2>
+      <p class="font-sans text-[13px] text-n-500 leading-relaxed mb-8 max-w-sm">
+        Selezioniamo capi nuovi e di seconda mano per bambini da 0 a 12 anni. Ogni pezzo è scelto con la stessa cura che metteresti tu.
+      </p>
+      <a routerLink="/chi-siamo"
+         class="font-sans text-[11px] tracking-px16 uppercase text-dark border-b border-dark/30 hover:border-dark pb-0.5 transition-colors duration-200">
+        La nostra storia &rarr;
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     EDITORIAL GRID
+     ========================================================= -->
+<section class="max-w-screen-xl mx-auto px-4 md:px-8 lg:px-12 py-6 md:py-10">
   <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
-    @for (ed of editorials; track ed.tab) {
-      <a [routerLink]="['/products']" [queryParams]="{tab: ed.tab}"
-         class="editorial-card group block cursor-pointer">
-        <div class="aspect-[4/5] overflow-hidden bg-n-100 relative img-zoom">
-          <img [src]="ed.img" [alt]="ed.title" class="w-full h-full object-cover" loading="lazy" />
-          <!-- hover overlay -->
+    @for (ed of editorials; track ed.path) {
+      <a [routerLink]="ed.path" class="editorial-card group block cursor-pointer">
+        <div class="aspect-[4/5] overflow-hidden bg-n-100 relative">
+          <img [src]="ed.img" [alt]="ed.title"
+               class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+               loading="lazy" />
           <div class="absolute inset-0 bg-dark/0 group-hover:bg-dark/20 transition-colors duration-400 flex items-end justify-center pb-6 opacity-0 group-hover:opacity-100">
-            <span class="bg-white text-dark font-sans text-[10px] tracking-px16 uppercase px-6 py-2.5">
-              Scopri
-            </span>
+            <span class="bg-white text-dark font-sans text-[10px] tracking-px16 uppercase px-6 py-2.5">Scopri</span>
           </div>
         </div>
-        <div class="pt-3 pb-1">
+        <div class="pt-3">
           <p class="font-sans text-[9px] tracking-px16 uppercase text-n-400 mb-1">{{ ed.sub }}</p>
           <h2 class="font-sans font-medium text-[13px] text-dark tracking-px4">{{ ed.title }}</h2>
         </div>
@@ -107,34 +116,85 @@
 </section>
 
 <!-- =========================================================
-     FULL-WIDTH IMAGE + COPY — Bonpoint style
+     LE PROSSIME LIVE
+     ========================================================= -->
+<section class="border-t border-n-200 bg-n-100 py-14">
+  <div class="max-w-screen-xl mx-auto px-4 md:px-8 lg:px-12">
+    <div class="flex items-end justify-between mb-8">
+      <div>
+        <p class="font-sans text-[10px] tracking-px24 uppercase text-n-400 mb-2">Instagram Live</p>
+        <h2 class="font-cormorant font-light text-3xl md:text-4xl text-dark">Le prossime live</h2>
+      </div>
+      <a routerLink="/live" class="hidden md:block font-sans text-[11px] tracking-px8 uppercase text-dark border-b border-dark/30 hover:border-dark pb-0.5 transition-colors">
+        Tutte le live &rarr;
+      </a>
+    </div>
+    <div class="grid md:grid-cols-3 gap-4">
+      @for (l of liveSchedule; track l.day) {
+        <div class="bg-white border border-n-200 p-6">
+          <p class="font-cormorant italic text-2xl text-dark mb-1">{{ l.day }}</p>
+          <p class="font-sans text-[11px] tracking-px8 text-moka font-medium mb-2">{{ l.time }}</p>
+          <p class="font-sans text-[12px] text-n-400">{{ l.note }}</p>
+        </div>
+      }
+    </div>
+    <div class="mt-6 text-center md:hidden">
+      <a routerLink="/live" class="font-sans text-[11px] tracking-px8 uppercase text-dark border-b border-dark/30">
+        Tutte le live &rarr;
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     COME FUNZIONA LA SCATOLA DODOLÍ
+     ========================================================= -->
+<section class="max-w-screen-xl mx-auto px-4 md:px-8 lg:px-12 py-16 md:py-20">
+  <div class="text-center mb-12">
+    <p class="font-sans text-[10px] tracking-px24 uppercase text-n-400 mb-3">Abbonamento mensile</p>
+    <h2 class="font-cormorant font-light text-3xl md:text-4xl text-dark">Come funziona la Scatola Dodolí</h2>
+  </div>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+    @for (s of scatolaSteps; track s.label; let i = $index) {
+      <div class="text-center">
+        <div class="w-10 h-10 border border-moka/40 flex items-center justify-center mx-auto mb-4">
+          <span class="font-cormorant italic text-lg text-moka">{{ i + 1 }}</span>
+        </div>
+        <p class="font-sans font-medium text-[12px] text-dark mb-1">{{ s.label }}</p>
+        <p class="font-sans text-[11px] text-n-400 leading-relaxed">{{ s.desc }}</p>
+      </div>
+    }
+  </div>
+  <div class="text-center">
+    <a routerLink="/scatola"
+       class="inline-block font-sans text-[11px] tracking-px16 uppercase text-dark border border-dark/30 hover:border-dark px-8 py-3.5 transition-colors duration-300">
+      Scopri la Scatola Dodolí
+    </a>
+  </div>
+</section>
+
+<!-- =========================================================
+     SECOND HAND SPLIT
      ========================================================= -->
 <section class="max-w-screen-xl mx-auto px-4 md:px-8 lg:px-12 py-6 md:py-10">
   <div class="grid md:grid-cols-2 gap-3 md:gap-4 items-stretch">
-
-    <!-- Large image -->
-    <div class="relative overflow-hidden img-zoom">
+    <div class="overflow-hidden">
       <div class="aspect-[4/5] md:aspect-auto md:h-full min-h-64 bg-n-200 overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1471286174890-9c112ffca5b4?w=1000&q=90&fit=crop&crop=center"
-             alt="Second hand selezionato" class="w-full h-full object-cover" />
+        <img src="https://images.unsplash.com/photo-1471286174890-9c112ffca5b4?w=1000&q=90&fit=crop"
+             alt="Seconda Storia" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
       </div>
     </div>
-
-    <!-- Copy block -->
     <div class="bg-n-100 flex flex-col justify-center px-10 md:px-16 py-14 md:py-20">
-      <p class="font-sans text-[10px] tracking-px24 uppercase text-n-400 mb-5">
-        Second Hand Selezionato
-      </p>
+      <p class="font-sans text-[10px] tracking-px24 uppercase text-n-400 mb-5">Seconda Storia</p>
       <h2 class="font-cormorant font-light text-4xl md:text-5xl text-dark leading-tight mb-6">
         Ogni capo ha<br>già una storia.<br>
         <em class="italic text-n-500">Sta per iniziarne<br>un'altra.</em>
       </h2>
       <p class="font-sans text-[13px] text-n-500 leading-relaxed mb-8 max-w-sm">
-        Selezioniamo personalmente ogni pezzo usato. Solo qualità, solo capo in perfetto stato. Perché i tuoi bambini meritano il meglio — a qualunque prezzo.
+        Selezioniamo ogni pezzo usato con cura. Solo qualità, solo capi in perfetto stato.
       </p>
-      <a routerLink="/products" [queryParams]="{tab:'second'}"
-         class="self-start font-sans text-[11px] tracking-px16 uppercase text-dark
-                border border-dark/30 hover:border-dark px-7 py-3 transition-colors duration-300">
+      <a routerLink="/seconda-storia"
+         class="self-start font-sans text-[11px] tracking-px16 uppercase text-dark border border-dark/30 hover:border-dark px-7 py-3 transition-colors duration-300">
         Esplora la selezione
       </a>
     </div>
@@ -142,24 +202,14 @@
 </section>
 
 <!-- =========================================================
-     CERIMONIA BANNER
+     LARGE TYPE BANNER
      ========================================================= -->
-<section class="max-w-screen-xl mx-auto px-4 md:px-8 lg:px-12 py-6 md:py-10">
-  <div class="relative overflow-hidden img-zoom">
-    <div class="aspect-[16/7] bg-n-200 overflow-hidden">
-      <img src="https://images.unsplash.com/photo-1476234251651-f353703a034d?w=1600&q=90&fit=crop&crop=center"
-           alt="Cerimonia" class="w-full h-full object-cover" />
-      <div class="absolute inset-0 bg-moka-d/30"></div>
-    </div>
-    <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
-      <p class="font-sans text-[10px] tracking-px24 uppercase text-white/60 mb-4">La collezione</p>
-      <h2 class="font-cormorant font-light italic text-4xl md:text-6xl text-white mb-7">Cerimonia</h2>
-      <a routerLink="/products" [queryParams]="{tab:'ceremony'}"
-         class="font-sans text-[11px] tracking-px16 uppercase bg-white text-dark
-                px-9 py-3.5 hover:bg-n-100 transition-colors duration-300">
-        Scopri
-      </a>
-    </div>
+<section class="border-t border-b border-n-200 py-16 md:py-24 bg-n-50">
+  <div class="max-w-screen-xl mx-auto px-4 md:px-8 lg:px-12 text-center">
+    <p class="font-cormorant font-light italic text-4xl md:text-6xl lg:text-7xl text-dark leading-tight">
+      I bambini crescono in fretta.<br>
+      <em class="text-moka">La bellezza no.</em>
+    </p>
   </div>
 </section>
 
@@ -168,26 +218,23 @@
      ========================================================= -->
 <section class="max-w-screen-xl mx-auto px-4 md:px-8 lg:px-12 py-6 md:py-10 pb-16">
   <div class="grid md:grid-cols-2 gap-3 md:gap-4 items-stretch">
-    <!-- Copy -->
     <div class="bg-blush/30 flex flex-col justify-center px-10 md:px-16 py-14 md:py-20 order-2 md:order-1">
       <p class="font-sans text-[10px] tracking-px24 uppercase text-n-400 mb-5">Packaging Dodolí</p>
       <h2 class="font-cormorant font-light text-4xl md:text-5xl text-dark leading-tight mb-6">
         Un regalo,<br>due emozioni.
       </h2>
       <p class="font-sans text-[13px] text-n-500 leading-relaxed mb-8 max-w-sm">
-        Le nostre confezioni regalo trasformano ogni acquisto in un momento indimenticabile. Carta velina, nastro raso, bigliettino scritto a mano.
+        Carta velina, nastro raso, bigliettino scritto a mano. Ogni acquisto da Dodolí è un momento indimenticabile.
       </p>
-      <a routerLink="/products" [queryParams]="{tab:'packaging'}"
-         class="self-start font-sans text-[11px] tracking-px16 uppercase text-dark
-                border border-dark/30 hover:border-dark px-7 py-3 transition-colors duration-300">
-        Scopri il packaging
+      <a routerLink="/nuovi-arrivi"
+         class="self-start font-sans text-[11px] tracking-px16 uppercase text-dark border border-dark/30 hover:border-dark px-7 py-3 transition-colors duration-300">
+        Scopri la boutique
       </a>
     </div>
-    <!-- Image -->
-    <div class="overflow-hidden img-zoom order-1 md:order-2">
+    <div class="overflow-hidden order-1 md:order-2">
       <div class="aspect-[4/5] md:aspect-auto md:h-full min-h-64 bg-n-200 overflow-hidden">
         <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=900&q=90&fit=crop"
-             alt="Packaging regalo" class="w-full h-full object-cover" />
+             alt="Packaging regalo" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
       </div>
     </div>
   </div>
